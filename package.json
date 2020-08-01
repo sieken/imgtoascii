@@ -1,0 +1,32 @@
+{
+  "name": "imgtoascii",
+  "version": "1.0.0",
+  "description": "Turn images into ASCII representations",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sieken/imgtoascii.git"
+  },
+  "keywords": [
+    "ascii",
+    "ASCII",
+    "image",
+    "image-conversion"
+  ],
+  "author": "sieken (David Henriksson)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/sieken/imgtoascii/issues"
+  },
+  "homepage": "https://github.com/sieken/imgtoascii#readme",
+  "dependencies": {
+    "jimp": "^0.14.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.0"
+  }
+}
