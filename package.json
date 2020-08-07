@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Turn images into ASCII representations",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "mocha"
   },
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/sieken/imgtoascii#readme",
   "dependencies": {
+    "chalk": "^4.1.0",
     "jimp": "^0.14.0"
   },
   "devDependencies": {
