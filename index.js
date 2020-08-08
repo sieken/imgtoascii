@@ -9,12 +9,15 @@ const argsToOptions = args => {
 
 	args.forEach((arg, index) => {
 		switch(arg) {
+			case '--color':
 			case '-c': ops.color = true; break;
 
+			case '--contrast': ops.contrast = parseFloat(args[index + 1]); break;
+
+			case '--saturation': ops.saturation = parseFloat(args[index + 1]); break;
+
 			case '-s': 
-			case '--scale':
-				try { ops.scale = parseFloat(args[index + 1]) }
-				catch { console.error('what') }
+			case '--scale': ops.scale = parseFloat(args[index + 1]); break;
 
 			default: break;
 		}
@@ -44,16 +47,22 @@ jimp.read(options.path)
 	})
 	.then(img => {
 		const greyscale = img.clone().greyscale()
+		if (options.contrast) greyscale.contrast(options.contrast)
+
+		if (options.saturation) img.color([ { apply: 'saturate', params: [options.saturation] } ])
 
 		let width = img.getWidth()
 		let height = img.getHeight()
 		let asciiString = ''
 
+		// TODO Japanese/Other full-width console font set
+		const charSet = standardRampChars
+
 		for (let y = 0; y < height; y++) {
 			for (let x = 0; x < width; x++) {
 				const rgba = jimp.intToRGBA(img.getPixelColor(x, y))
 				const intensity = jimp.intToRGBA(greyscale.getPixelColor(x, y)).r
-				let char = matchAscii(intensity, standardRampChars)
+				let char = matchAscii(intensity, charSet)
 				if (options.color)
 					char = chalk.rgb(rgba.r, rgba.g, rgba.b)(char)
 				asciiString += char
