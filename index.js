@@ -32,13 +32,13 @@ const matchAscii = (pixelVal, asciiSet) => {
 
 
 const options = argsToOptions(process.argv.slice(2))
+const defaultWidth = 50
 
 jimp.read(options.path)
 	.then(img => {
-		// TODO figure out scale to match terminal width?
-		const scale = options.scale ? options.scale : 1.0
-		// TODO figure out stretch ratio based on regular console font size
-		const stretch = 1.8
+		const scale = options.scale ? options.scale : (defaultWidth/img.getWidth())
+		// TODO stretch = 1.0 if we use double width console font
+		const stretch = 2.0
 		return img
 			.resize(img.getWidth() * scale * stretch, img.getHeight() * scale)
 	})
